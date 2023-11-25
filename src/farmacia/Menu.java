@@ -15,14 +15,13 @@ public class Menu {
 	static Scanner leia = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
+
 		ProdutoController produtos = new ProdutoController();
 		int opcao = 0, codigo, tipo;
 		String nome, generico, fragrancia;
 		float preco;
-		
-		while (true) {
 
+		while (true) {
 
 			System.out.println("-------------------------------------");
 			System.out.println("               Farmácia              ");
@@ -48,43 +47,41 @@ public class Menu {
 			case 1 -> {
 				System.out.println("Opção cadastrar selecionada!");
 
-				System.out.print("Digite o nome do produto: ");		
+				System.out.print("Digite o nome do produto: ");
 				leia.skip("\\R");
-				nome = leia.nextLine();				
-				
-				
+				nome = leia.nextLine();
+
 				System.out.print("Digite o tipo do produto: 1 Medicamento | 2 Cosmetico");
-				
+
 				do {
 					tipo = leia.nextInt();
 				} while (tipo < 1 || tipo > 2);
-				
+
 				System.out.print("Digite o valor do produto: ");
 				preco = leia.nextFloat();
-				
+
 				leia.nextLine();
 				switch (tipo) {
-				
-				
-				case 1 ->{ 
-						
-						System.out.print("Digite o nome do genérico: ");
-						generico = leia.nextLine();		
-						produtos.cadastrarProduto(new Medicamento(produtos.gerarCodigo(), nome, tipo, preco, generico));
-				
+
+				case 1 -> {
+
+					System.out.print("Digite o nome do genérico: ");
+					generico = leia.nextLine();
+					produtos.cadastrarProduto(new Medicamento(produtos.gerarCodigo(), nome, tipo, preco, generico));
+
 				}
 				case 2 -> {
-						
-						System.out.print("Digite a fragrância do produto: ");
-						fragrancia = leia.nextLine();
-						produtos.cadastrarProduto(new Cosmetico(produtos.gerarCodigo(), nome, tipo, preco, fragrancia));
+
+					System.out.print("Digite a fragrância do produto: ");
+					fragrancia = leia.nextLine();
+					produtos.cadastrarProduto(new Cosmetico(produtos.gerarCodigo(), nome, tipo, preco, fragrancia));
 				}
 				}
 				keyPress();
 			}
 			case 2 -> {
 				System.out.println("Opção listar produtos selecionada!");
-				
+
 				produtos.listarProdutos();
 
 				keyPress();
@@ -95,19 +92,19 @@ public class Menu {
 				System.out.print("Digite o código do produto: ");
 				codigo = leia.nextInt();
 				produtos.pesquisarPorNumero(codigo);
-				
+
 				keyPress();
 			}
 			case 4 -> {
 				System.out.println("Opção atualizar produto selecionada!");
-				
+
 				System.out.print("Digite o código do produto: ");
 				codigo = leia.nextInt();
-				
+
 				Optional<Produto> produtoTipo = produtos.percorrerLista(codigo);
-				
-				if(produtoTipo.isPresent()) {
-					
+
+				if (produtoTipo.isPresent()) {
+
 					System.out.print("Digite o nome do produto: ");
 					leia.skip("\\R");
 					nome = leia.nextLine();
@@ -115,29 +112,30 @@ public class Menu {
 					tipo = produtoTipo.get().getId();
 
 					switch (tipo) {
-					case 1 ->{ System.out.print("Digite o valor do produto: ");
-					preco = leia.nextFloat();
-					
-					System.out.print("Digite o nome do genérico: ");
-					leia.skip("\\R");
-					generico = leia.nextLine();
-					
-					produtos.atualizarProduto(new Medicamento(codigo, nome, tipo, preco, generico));
-					
+					case 1 -> {
+						System.out.print("Digite o valor do produto: ");
+						preco = leia.nextFloat();
+
+						System.out.print("Digite o nome do genérico: ");
+						leia.skip("\\R");
+						generico = leia.nextLine();
+
+						produtos.atualizarProduto(new Medicamento(codigo, nome, tipo, preco, generico));
+
 					}
-					case 2 -> { System.out.print("Digite o valor do produto: ");
-					preco = leia.nextFloat();
-					
-					System.out.print("Digite o nome do genérico: ");
-					fragrancia = leia.nextLine();
-					
-					produtos.atualizarProduto(new Cosmetico(codigo, nome, tipo, preco, fragrancia));
+					case 2 -> {
+						System.out.print("Digite o valor do produto: ");
+						preco = leia.nextFloat();
+
+						System.out.print("Digite o nome do genérico: ");
+						fragrancia = leia.nextLine();
+
+						produtos.atualizarProduto(new Cosmetico(codigo, nome, tipo, preco, fragrancia));
 					}
-					}					
-			
-				}else
+					}
+
+				} else
 					System.out.println("Produto não encontrado");
-				
 
 				keyPress();
 			}
@@ -147,7 +145,7 @@ public class Menu {
 				System.out.print("Digite o código do produto: ");
 				codigo = leia.nextInt();
 				produtos.removerProduto(codigo);
-				
+
 				keyPress();
 			}
 			case 0 -> {
