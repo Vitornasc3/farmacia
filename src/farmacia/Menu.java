@@ -127,7 +127,8 @@ public class Menu {
 						System.out.print("Digite o valor do produto: ");
 						preco = leia.nextFloat();
 
-						System.out.print("Digite o nome do genérico: ");
+						System.out.print("Digite o nome da fragrância: ");
+						leia.skip("\\R");
 						fragrancia = leia.nextLine();
 
 						produtos.atualizarProduto(new Cosmetico(codigo, nome, tipo, preco, fragrancia));
